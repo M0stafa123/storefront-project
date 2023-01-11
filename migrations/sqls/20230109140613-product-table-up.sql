@@ -1,0 +1,1 @@
+CREATE TABLE products(id serial primary key,name VARCHAR NOT NULL,price float NOT NULL);

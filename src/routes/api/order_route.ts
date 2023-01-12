@@ -6,6 +6,21 @@ const ORDEROUTE = express.Router();
 ORDEROUTE.use(bodyParser.json());
 const order = new ORDER();
 
+ORDEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const Order = await order.index();
+
+    if (Order) {
+      res.json(Order);
+    } else {
+      res.status(404).send('resource not found');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 //get Order by id
 ORDEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);

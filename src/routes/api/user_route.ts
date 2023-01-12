@@ -7,6 +7,23 @@ USEROUTE.use(bodyParser.json());
 const user = new USER();
 const TS = process.env.TOKEN_SECRET;
 //get user by id
+USEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
+  const id: number = parseInt(req.params.id as string);
+
+  try {
+    const User = await user.index();
+
+    if (User) {
+      res.json(User);
+    } else {
+      res.status(404).send(' not found');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {

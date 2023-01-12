@@ -12,7 +12,8 @@ export class mapping {
   async join(): Promise<fetching[]> {
     try {
       const conn = await client.connect();
-      const sql = 'SELECT product_id, quantity, order_id FROM products INNER JOIN mapping ON products.id=mapping.product_id;';
+      const sql =
+        'SELECT products.id as product_id, orders.quantity as quantity, order_id FROM products,orders INNER JOIN mapping ON orders.product_id=mapping.product_id;';
       const result = await conn.query(sql);
       conn.release();
       return result.rows;

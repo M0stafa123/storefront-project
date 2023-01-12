@@ -57,7 +57,7 @@ ORDEROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<an
 });
 
 //delete an Order
-ORDEROUTE.delete('/:id', async (req: Request, res: Response): Promise<void> => {
+ORDEROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {

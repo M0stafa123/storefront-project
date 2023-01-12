@@ -56,7 +56,7 @@ PRODUCTROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise
 });
 
 //delete a  product
-PRODUCTROUTE.delete('/:id', async (req: Request, res: Response): Promise<void> => {
+PRODUCTROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {

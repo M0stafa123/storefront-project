@@ -26,7 +26,7 @@ USEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
+USEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {
@@ -57,7 +57,7 @@ USEROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<any
 });
 
 //delete a resouce
-USEROUTE.delete('/:id', async (req: Request, res: Response): Promise<void> => {
+USEROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {
@@ -73,6 +73,22 @@ USEROUTE.delete('/:id', async (req: Request, res: Response): Promise<void> => {
     }
   } else {
     res.sendStatus(404);
+  }
+});
+USEROUTE.post('/authenticate', async (req: Request, res: Response): Promise<void> => {
+  const username = req.body.username;
+  const password = req.body.password;
+  try {
+    const User = await user.authenticate(username, password);
+    const token = jwt.sign({ User }, process.env.TOKEN_SECRET as string);
+    if (User) {
+      res.json(token);
+    } else {
+      res.status(404).send(' not found');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
   }
 });
 

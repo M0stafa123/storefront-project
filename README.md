@@ -1,5 +1,7 @@
 http://localhost:3000
 
+server running at port 3000
+
 dev ==> project
 test==>project_test
 

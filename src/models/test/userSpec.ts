@@ -23,7 +23,6 @@ describe('user model methods', () => {
     });
 
     expect(test.id).toEqual(2);
-    console.log(test);
   });
 
   it('should search user', async () => {

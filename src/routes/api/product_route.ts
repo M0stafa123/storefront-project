@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express, { Request, Response } from 'express';
 import { PRODUCT, PRODUCTT } from '../../models/product';
+import verifyToken from '../../auth';
 
 const PRODUCTROUTE = express.Router();
 PRODUCTROUTE.use(bodyParser.json());
@@ -43,7 +44,7 @@ PRODUCTROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
 });
 
 //post product, adds a new product
-PRODUCTROUTE.post('/', async (req: Request, res: Response): Promise<any> => {
+PRODUCTROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
   if (!req.body.name || typeof req.body.name !== 'string') {
     return res.status(400).send('write valid request');
   }

@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express, { Request, Response } from 'express';
 import { ORDER, ORDERT } from '../../models/order';
+import verifyToken from '../../auth';
 
 const ORDEROUTE = express.Router();
 ORDEROUTE.use(bodyParser.json());
@@ -43,7 +44,7 @@ ORDEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
 });
 
 //post Order, adds a new Order
-ORDEROUTE.post('/', async (req: Request, res: Response): Promise<any> => {
+ORDEROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
   if (!req.body.user_id || typeof req.body.user_id !== 'string') {
     console.log(req.body.user_id);
 

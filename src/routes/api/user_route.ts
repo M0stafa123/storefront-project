@@ -2,6 +2,8 @@ import bodyParser from 'body-parser';
 import express, { Request, Response } from 'express';
 import { USER, USERT } from '../../models/user';
 import jwt from 'jsonwebtoken';
+import verifyToken from '../../auth';
+
 const USEROUTE = express.Router();
 USEROUTE.use(bodyParser.json());
 const user = new USER();
@@ -45,7 +47,7 @@ USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
 });
 
 //post user, adds a new user
-USEROUTE.post('/', async (req: Request, res: Response): Promise<any> => {
+USEROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
   if (!req.body.username || typeof req.body.username !== 'string') {
     return res.status(400).send('write valid request');
   }

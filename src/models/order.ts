@@ -2,7 +2,7 @@ import client from '../database';
 //T refers to type
 export interface ORDERT {
   id?: number;
-  product_id: number;
+  product_id?: number;
   user_id: number;
   quantity: number;
   status: boolean;

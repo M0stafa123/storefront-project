@@ -58,7 +58,7 @@ export class USER {
   }
   async authenticate(username: string, password: string): Promise<USERT | null> {
     const conn = await client.connect();
-    const sql = 'SELECT password FROM users WHERE username=($1)';
+    const sql = 'SELECT * FROM users WHERE username=($1)';
 
     const result = await conn.query(sql, [username]);
 

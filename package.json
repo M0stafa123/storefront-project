@@ -9,10 +9,10 @@
     "start": "nodemon src/server.ts",
     "startjs": "nodemon dist/.",
     "jasmine": "jasmine",
-    "testreset": "db-migrate down --config ./database.json --e test",
-    "testup": "db-migrate --config ./database.json --e test up",
+    "testreset": "db-migrate reset --config ./database.json --e test",
+    "testup": "db-migrate up --config ./database.json --e test ",
     "prettier": "prettier --config .prettierrc {,!(node_modules)/**/}*.ts --write",
-    "test": "npm run build && set ENV=test && db-migrate up --env test && jasmine && db-migrate reset",
+    "test": " npm run testreset && npm run build && set NODE_ENV=test&& npm run testup  --env test && jasmine ",
     "devup": "db-migrate up --config ./database.json --e dev",
     "devreset": "db-migrate reset --config ./database.json --e dev"
   },

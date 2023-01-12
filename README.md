@@ -12,3 +12,21 @@ NODE_ENV=dev
 BCRYPT_PASSWORD=my-secret
 SALT_ROUNDS=5
 TOKEN_SECRET=SWEETHOME123
+
+if (NODE_ENV == 'test') {
+client = new Pool({
+host: POSTGRES_HOST,
+database: POSTGRES_TEST_DB,
+user: POSTGRES_USER,
+password: POSTGRES_PASSWORD
+});
+}
+
+if (NODE_ENV == 'dev') {
+client = new Pool({
+host: POSTGRES_HOST,
+database: POSTGRES_DB,
+user: POSTGRES_USER,
+password: POSTGRES_PASSWORD
+});
+}

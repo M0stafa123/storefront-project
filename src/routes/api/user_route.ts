@@ -65,7 +65,7 @@ USEROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promis
       if (deleted) {
         res.sendStatus(204);
       } else {
-        res.status(404).send(' not found');
+        res.status(200).send(`user with id ${id} deleted successfuly`);
       }
     } catch (err) {
       console.log(err);

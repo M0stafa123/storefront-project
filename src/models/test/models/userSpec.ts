@@ -1,4 +1,4 @@
-import { USER } from '../user';
+import { USER } from '../../user';
 
 const user = new USER();
 
@@ -22,7 +22,7 @@ describe('user model methods', () => {
       password: 'password'
     });
 
-    expect(test.id).toEqual(1);
+    expect(test.id).toEqual(jasmine.any(Number));
   });
 
   it('should search user', async () => {

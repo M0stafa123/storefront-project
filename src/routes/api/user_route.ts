@@ -9,7 +9,7 @@ USEROUTE.use(bodyParser.json());
 const user = new USER();
 const TS = process.env.TOKEN_SECRET;
 //get user by id
-USEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
+USEROUTE.get('/', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
 
   try {
@@ -26,7 +26,7 @@ USEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
+USEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {
@@ -47,7 +47,7 @@ USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
 });
 
 //post user, adds a new user
-USEROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
+USEROUTE.post('/', async (req: Request, res: Response): Promise<any> => {
   if (!req.body.username || typeof req.body.username !== 'string') {
     return res.status(400).send('write valid request');
   }

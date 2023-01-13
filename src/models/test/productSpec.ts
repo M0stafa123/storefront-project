@@ -23,9 +23,14 @@ describe('product model methods', () => {
 
     expect(test.id).toEqual(1);
   });
-
   it('should search product', async () => {
-    const search = await product.show(1);
-    expect(search.price).toBe(5);
+    const test = await product.create({
+      id: 10,
+      name: 'product1',
+      price: 10
+    });
+
+    const search = await product.show(test.id as number);
+    expect(search.price).toBe(10);
   });
 });

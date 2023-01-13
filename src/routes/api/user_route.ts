@@ -26,7 +26,7 @@ USEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-USEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
+USEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {

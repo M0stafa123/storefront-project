@@ -7,7 +7,7 @@ const ORDEROUTE = express.Router();
 ORDEROUTE.use(bodyParser.json());
 const order = new ORDER();
 
-ORDEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
+ORDEROUTE.get('/', verifyToken, async (req: Request, res: Response): Promise<void> => {
   try {
     const Order = await order.index();
 
@@ -23,7 +23,7 @@ ORDEROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
 });
 
 //get Order by id
-ORDEROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
+ORDEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<void> => {
   const id: number = parseInt(req.params.id as string);
   if (id) {
     try {

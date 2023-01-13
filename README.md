@@ -1,7 +1,7 @@
 http://localhost:3000
 
 server running at port 3000
-
+database running on 5432
 dev ==> project
 test==>project_test
 

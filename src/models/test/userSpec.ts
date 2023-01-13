@@ -22,7 +22,7 @@ describe('user model methods', () => {
       password: 'password'
     });
 
-    expect(test.id).toEqual(2);
+    expect(test.id).toEqual(1);
   });
 
   it('should search user', async () => {

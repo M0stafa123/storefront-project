@@ -8,7 +8,4 @@ routes.use('/products', PRODUCTROUTE);
 routes.use('/users', USEROUTE);
 routes.use('/orders', ORDEROUTE);
 routes.use('/mapping', MAPROUTE);
-routes.get('/', (_req, res): void => {
-  res.send('API route');
-});
 export default routes;

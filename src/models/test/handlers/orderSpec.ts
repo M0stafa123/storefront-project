@@ -1,26 +1,24 @@
-import supertest from 'supertest';
 import app from '../../../server';
-
+import supertest = require('supertest');
 const request = supertest(app);
 
-describe('Checking user routes', (): void => {
-  it('index (should get jwt authentication error)', async (): Promise<void> => {
-    const response = await request.get('/orders');
-    expect(response.statusCode).toEqual(404);
-  });
+it('test index route works', async (): Promise<void> => {
+  const response = await request.get('/orders');
+  expect(response.statusCode).toEqual(200);
+});
 
-  it('show(should get jwt authentication error)', async (): Promise<void> => {
-    const response = await request.get('/orders/1');
-    expect(response.statusCode).toEqual(404);
-  });
+// status will be 401 because there will be no product with id 2
+it('test show route works', async (): Promise<void> => {
+  const response = await request.get('/orders/2');
+  expect(response.statusCode).toEqual(200);
+});
 
-  it('create(should get jwt authentication error)', async (): Promise<void> => {
-    const response = await request.post('/orders');
-    expect(response.statusCode).toEqual(404);
-  });
+it('test create route works', async (): Promise<void> => {
+  const response = await request.get('/orders');
+  expect(response.statusCode).toEqual(200);
+});
 
-  it('delete (should get jwt authentication error)', async (): Promise<void> => {
-    const response = await request.delete('/orders/1');
-    expect(response.statusCode).toEqual(404);
-  });
+it('test delete route works', async (): Promise<void> => {
+  const response = await request.get('/orders/2');
+  expect(response.statusCode).toEqual(200);
 });

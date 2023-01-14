@@ -4,7 +4,7 @@ const pepper = process.env.BCRYPT_PASSWORD;
 const SR = process.env.SALT_ROUNDS;
 export interface USERT {
   id?: number;
-  username?: string;
+  username: string;
   password: string;
 }
 

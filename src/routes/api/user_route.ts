@@ -18,7 +18,7 @@ USEROUTE.get('/', verifyToken, async (req: Request, res: Response): Promise<void
     if (User) {
       res.json(User);
     } else {
-      res.status(404).send(' not found');
+      res.status(401).send(' not found');
     }
   } catch (err) {
     console.log(err);
@@ -35,14 +35,14 @@ USEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<v
       if (User) {
         res.json(User);
       } else {
-        res.status(404).send(' not found');
+        res.status(401).send(' not found');
       }
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 });
 
@@ -72,7 +72,7 @@ USEROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promis
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 });
 USEROUTE.post('/authenticate', async (req: Request, res: Response): Promise<void> => {
@@ -84,7 +84,7 @@ USEROUTE.post('/authenticate', async (req: Request, res: Response): Promise<void
     if (User) {
       res.json(token);
     } else {
-      res.status(404).send(' not found');
+      res.status(401).send(' not found');
     }
   } catch (err) {
     console.log(err);

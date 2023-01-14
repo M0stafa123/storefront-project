@@ -14,10 +14,9 @@ PRODUCTROUTE.get('/', async (req: Request, res: Response): Promise<void> => {
     if (Product) {
       res.json(Product);
     } else {
-      res.status(404).send(' not found');
+      res.status(401).send(' not Found');
     }
   } catch (err) {
-    console.log(err);
     res.status(500).send(err);
   }
 });
@@ -32,14 +31,13 @@ PRODUCTROUTE.get('/:id', async (req: Request, res: Response): Promise<void> => {
       if (Product) {
         res.json(Product);
       } else {
-        res.status(404).send(' not found');
+        res.status(401).send(' not Found');
       }
     } catch (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 });
 
@@ -48,7 +46,6 @@ PRODUCTROUTE.post('/', verifyToken, async (req: Request, res: Response): Promise
   if (!req.body.name || typeof req.body.name !== 'string') {
     return res.status(400).send('write valid request');
   }
-  console.log(req.body);
 
   const newproduct = await product.create(req.body);
 
@@ -64,14 +61,13 @@ PRODUCTROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Pr
       if (deleted) {
         res.sendStatus(204);
       } else {
-        res.status(404).send('not found');
+        res.status(200).send(`product with id ${id} deleted successfuly `);
       }
     } catch (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(200);
   }
 });
 

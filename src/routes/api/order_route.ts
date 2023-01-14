@@ -14,7 +14,7 @@ ORDEROUTE.get('/', verifyToken, async (req: Request, res: Response): Promise<voi
     if (Order) {
       res.json(Order);
     } else {
-      res.status(404).send('resource not found');
+      res.status(401).send('resource not found');
     }
   } catch (err) {
     console.log(err);
@@ -32,14 +32,14 @@ ORDEROUTE.get('/:id', verifyToken, async (req: Request, res: Response): Promise<
       if (Order) {
         res.json(Order);
       } else {
-        res.status(404).send('resource not found');
+        res.status(401).send('resource not found');
       }
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 });
 
@@ -65,14 +65,14 @@ ORDEROUTE.delete('/:id', verifyToken, async (req: Request, res: Response): Promi
       if (deleted) {
         res.sendStatus(204);
       } else {
-        res.status(404).send('resource not found');
+        res.status(401).send('resource not found');
       }
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
     }
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 });
 

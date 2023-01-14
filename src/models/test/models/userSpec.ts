@@ -1,32 +1,20 @@
 import { USER } from '../../user';
-
 const user = new USER();
+const create = user.create({
+  username: 'test',
+  password: ''
+});
 
-describe('user model methods', () => {
-  it('should contain index method', () => {
-    expect(user.index).toBeDefined();
-  });
-  it('should contain show method', () => {
-    expect(user.show).toBeDefined();
-  });
-  it('should contain create method', () => {
-    expect(user.create).toBeDefined();
-  });
-  it('should contain delete method', () => {
-    expect(user.delete).toBeDefined();
-  });
+it('should test create method', async () => {
+  expect((await create).username).toEqual('test');
+});
 
-  it('should create user', async () => {
-    const test = await user.create({
-      username: 'mostafa',
-      password: 'password'
-    });
+it('should test index method', async () => {
+  const index = await user.index();
+  expect(index).toContain(await create);
+});
 
-    expect(test.id).toEqual(jasmine.any(Number));
-  });
-
-  it('should search user', async () => {
-    const search = await user.show(1);
-    expect(search.username).toEqual('mostafa');
-  });
+it('should test show method', async () => {
+  const show = await user.show(1);
+  expect(show.id).toEqual(1);
 });

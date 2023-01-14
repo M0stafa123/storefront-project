@@ -1,36 +1,20 @@
-import { PRODUCT } from '../../product';
-
+import { PRODUCT } from '../../PRODUCT';
 const product = new PRODUCT();
+const create = product.create({
+  name: 'test',
+  price: 1
+});
 
-describe('product model methods', () => {
-  it('should contain index method', () => {
-    expect(product.index).toBeDefined();
-  });
-  it('should contain show method', () => {
-    expect(product.show).toBeDefined();
-  });
-  it('should contain create method', () => {
-    expect(product.create).toBeDefined();
-  });
-  it('should contain delete method', () => {
-    expect(product.delete).toBeDefined();
-  });
-  it('should create prodcuct', async () => {
-    const test = await product.create({
-      name: 'product1',
-      price: 5
-    });
+it('should test create method', async () => {
+  expect((await create).name).toEqual('test');
+});
 
-    expect(test.id).toEqual(jasmine.any(Number));
-  });
-  it('should search product', async () => {
-    const test = await product.create({
-      id: 10,
-      name: 'product1',
-      price: 10
-    });
+it('should test index method', async () => {
+  const index = await product.index();
+  expect(index).toContain(await create);
+});
 
-    const search = await product.show(test.id as number);
-    expect(search.price).toBe(jasmine.any(Number));
-  });
+it('should test show method', async () => {
+  const show = await product.show(1);
+  expect(show.id).toEqual(1);
 });
